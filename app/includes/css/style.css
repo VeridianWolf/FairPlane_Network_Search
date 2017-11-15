@@ -1,0 +1,71 @@
+/*
+ *
+ *   Stylesheet
+ *   Website.co.uk
+ *
+ */
+
+body {
+    background: #45C4DE;
+    color: #ffffff;
+}
+
+.pd10{
+    padding: 10px;
+}
+
+.pd20{
+    padding: 20px;
+}
+
+.right {
+    text-align: right;
+}
+
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+a  {
+    color: #ffffff;
+}
+
+a:hover  {
+    color: #ffffff;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+li {
+    padding-left: 1.3em;
+    list-style-type: none;
+}
+li:before {
+    content: "\f0da"; /* FontAwesome Unicode */
+    font-family: FontAwesome;
+    display: inline-block;
+    margin-left: -1.3em; /* same as padding-left set on li */
+    width: 1.3em; /* same as padding-left set on li */
+}
+
+.search_results{
+    border: 3px dotted #19638B;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);;
+    min-height: 250px;
+
+}
+
+.heading_blue{
+    color: #19638B;
+}
+
+.span_red{
+    color: #ff0000;
+}
