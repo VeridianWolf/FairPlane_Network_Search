@@ -25,30 +25,32 @@ if (!empty($surname))
     $sqlString		.=	" AND surname like '%" . $surname ."%' ";
 }
 
+#empty array called data
 $data = array();
 
+# variable $num_items = count the items within $returnArray
 $num_items = count($returnArray);
 
-#start table
+#start table outside of foreach loop
 $html = '<table>';
 
-#1
-$html .= '<tr>';
-$html .= '<th><th/>';
-$html .= '<th><th/>';
-$html .= '<th><th/>';
-$html .= '</tr>';
+
+#start table headers outside of loop also as these won't change
+$html .= "<tr>";
+$html .= "<th>Order Id<th/>";
+$html .= "<th>Email Address<th/>";
+$html .= "<th>Surname<th/>";
+$html .= "</tr>";
+
 
 foreach ($returnArray as $data)
 {
+    # grabs the data from each column of the database id / email / surname
     $id = $data['id'];
     $email = $data['email'];
     $surname = $data['surname'];
 
-    # build html string
-
-
-    #2
+    # this part of the table will be filled with the info that is grabbed from the database using the code above
     $html .= "<tr>";
     $html .= "<td>$id<td/>";
     $html .= "<td>$email<td/>";
@@ -56,7 +58,7 @@ foreach ($returnArray as $data)
     $html .= "</tr>";
 }
 
-    #finish table
+    #finish table - close the table html tag
     $html .= '</table>';
 
 
@@ -67,6 +69,8 @@ $returnArray    =   array	(
     "{{table}}" => $html
 
 );
+
+
 # return array is encoded so that jquery can understand it
 echo json_encode($returnArray);
 
