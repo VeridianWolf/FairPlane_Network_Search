@@ -1,9 +1,8 @@
 <?php
 #include these files from codelibrary
-require_once($_SERVER["DOCUMENT_ROOT"]	.	"/codelibrary/includes/php/autoload.php");
-require_once($_SERVER["DOCUMENT_ROOT"]	.	"/codelibrary/includes/php/common.php");
-require_once("/config.inc.php");
-
+require_once($_SERVER["DOCUMENT_ROOT"]	.	"../codelibrary/includes/php/autoload.php");
+require_once($_SERVER["DOCUMENT_ROOT"]	.	"../codelibrary/includes/php/common.php");
+require_once ("../config.inc.php");
 
 # mysql = new connection to Mysql_Library()
 $gMysql				=	new Mysql_Library();
@@ -30,7 +29,7 @@ $surname = "";
 
 
 # get the variables from $_POST
-# gets the order_id, email and suranme that are entered into the input fields
+# gets the order_id, email and surname that are entered into the input fields
 $order_id			= GetVariableString('search_order_id',$_POST,"");
 $email			    = GetVariableString('search_email',$_POST,"");
 $surname			= GetVariableString('search_surname',$_POST,"");
@@ -97,7 +96,6 @@ foreach ($data_2d_array as $data)
                 <td>$surname<td/>
              </tr>";
 }
-
 
 
 #finish table - close the table html tag
