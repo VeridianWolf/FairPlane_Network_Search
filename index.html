@@ -3,7 +3,7 @@
 <div class="pd20"></div>
 <div class="pd20"></div>
 
-<form id="affiliate_search">
+<form class="affiliate_search" id="affiliate_search" name="affiliate_search" action="#" method="POST">
     <div class="form-group row">
         <label for="search_order_id" class="col-2 col-form-label">Order ID</label>
         <div class="col-10">
@@ -44,9 +44,7 @@
 <div class="pd20"></div>
 
 
-<h3>Search Results:</h3>
-
-<div class="search_results">
+<div id="search_results" >
 
 </div>
 
@@ -59,18 +57,16 @@
     $(document).ready(function() {
 
 
-
-
         $('#affiliate_search').validate({
             rules: {
                 search_order_id: {
-                    required: true,
+                    required: false,
                 },
                 search_email: {
-                    required: true,
+                    required: false,
                 },
                 search_surname:   {
-                    required: true,
+                    required: false,
                 }
             },  //end rules
             messages: {
@@ -175,7 +171,7 @@
             // using ajax, we can call a php script and send it the variables.
             $.ajax(
                 {
-                    url:		'ajax/doSubmitCertificateWording.php',
+                    url:		'/scripts/doSearch.php',
                     type:		'POST',
                     cache:		false,
                     async:		true,
@@ -188,38 +184,16 @@
                         },
                     success:	function(data)
                     {
-                        // what happens if the script send an error code
-                        if	(data.returncode == 'error')
-                        {
-                            // a popup if we have an error from the submit script
-                            $.alert({
-                                theme: 'material',
-                                animation: 'scale',
-                                type: 'red',
-                                typeAnimated: 'true',
-                                confirmButton: 'Ok',
-                                title: 'A problem has occurred!',
-                                content: data.message,
-                            });
+
+                        alert(data.table);
+
+                        // on success show the table data where id = "search_results"
+                        $('#search_results').html(data.table);
 
 
-                        }
-                        // what happens if the script send a success code
-                        else if (data.returncode == 'success')
-                        {
-
-                            $.alert({
-                                theme: 'material',
-                                animation: 'scale',
-                                type: 'green',
-                                typeAnimated: 'true',
-                                confirmButton: 'Ok',
-                                title: 'Success!',
-                                content: data.message,
-                            });
 
 
-                        }
+
                     },
                     failure:	function()
                     {
@@ -248,10 +222,11 @@
         }
 
     }
-
-    <!-- this function has an alert inside which shows the selected value from the dropdown list -->
-
-
 </script>
+
+
+
+
+
 
 {{footer}}
