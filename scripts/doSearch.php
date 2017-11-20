@@ -38,8 +38,6 @@ $surname			= GetVariableString('search_surname',$_POST,"");
 # searches SQL table fp_flight_master_db_flight_info WHERE
 $sqlString	=	" select * from fp_flight_master_db_flight_info WHERE ";
 
-
-
 #if $order_id is not empty then add $order_id to $sqlString
 if (!empty($order_id))
 {
@@ -58,11 +56,12 @@ if (!empty($surname))
 
 
 # this variable is a two dimensional array
-# data_2d_array is equal to gMysql calls function selectToArray
+# data_2d_array is equal to gMysql and calls function selectToArray
+# selectToArray goes through the array and find the order_id, email and surname are tested with wildcard chars '%order%' for example to see if they exist in the table.
 $data_2d_array	=	$gMysql->selectToArray($sqlString,__FILE__,__LINE__);
 
 
-# variable $num_items = count the items within $data_2d_array (whole table)
+# variable $num_items = counts the items within $data_2d_array (whole table)
 $num_items = count($data_2d_array);
 
 #start table (outside of foreach loop)
@@ -80,7 +79,7 @@ $html .= "<tr>
 
 
 
-# this loops will go through the data_2d_array (table)
+# this loop will go through the data_2d_array (table)
 # and store each arrays value as a variable ($data)
 foreach ($data_2d_array as $data)
 {
@@ -100,7 +99,6 @@ foreach ($data_2d_array as $data)
 
 #finish table - close the table html tag
 $html .= '</table>';
-
 
 
 # returns the data in this array to the javascript ajax

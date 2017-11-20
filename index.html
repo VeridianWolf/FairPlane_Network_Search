@@ -188,6 +188,14 @@
                             // on success show the table data where id = "search_results"
                             $('#search_results').html(data.table);
 
+                            function getTableData(){
+                                $.ajax("",
+                                    { success: "",
+                                        type: "get",
+                                        dataType: "text"
+                                    });
+                            }
+
                         },
                         failure:	function()
                         {
@@ -196,7 +204,6 @@
                     }
 
                 )
-
 
             }
             else
