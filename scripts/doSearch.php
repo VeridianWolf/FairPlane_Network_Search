@@ -17,8 +17,6 @@ $returnArray		=	array();
 # message variable currently empty
 $message			=	"";
 
-
-
 # $order_id,
 # $email
 # $surname
@@ -46,20 +44,31 @@ if (!empty($order_id))
 #if $email is not empty then add $email to $sqlString
 if (!empty($email))
 {
-    $sqlString		.=	" AND email like '%" . $email ."%' ";
+    if (!empty($order_id))
+    {
+        $sqlString .=" AND ";
+    }
+    $sqlString		.=	"  email like '%" . $email ."%' ";
 }
 #if $surname is not empty then add $surname to $sqlString
 if (!empty($surname))
 {
-    $sqlString		.=	" AND surname like '%" . $surname ."%' ";
+    if ((!empty($order_id)) || (!empty($email)))
+    {
+        $sqlString .=" AND ";
+    }
+    $sqlString		.=	"  surname like '%" . $surname ."%' ";
 }
 
+if (empty($order_id) && empty($email) && empty($surname))
+{
+    $sqlString .= " 1 = 1 ";
+}
 
 # this variable is a two dimensional array
 # data_2d_array is equal to gMysql and calls function selectToArray
-# selectToArray goes through the array and find the order_id, email and surname are tested with wildcard chars '%order%' for example to see if they exist in the table.
+# selectToArray goes through the array and finds either the order_id, email or surname (uses wildcard chars e.g. '%order%' they exist in the table.
 $data_2d_array	=	$gMysql->selectToArray($sqlString,__FILE__,__LINE__);
-
 
 # variable $num_items = counts the items within $data_2d_array (whole table)
 $num_items = count($data_2d_array);
@@ -104,7 +113,7 @@ $html .= '</table>';
 # returns the data in this array to the javascript ajax
 $returnArray    =   array	(
 
-    "{{table}}" => $html
+    "result" => $html,
 
 );
 

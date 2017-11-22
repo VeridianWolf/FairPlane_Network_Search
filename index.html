@@ -44,185 +44,188 @@
 <div class="pd20"></div>
 
 
-<div id="search_results" >
+<div class="search_results" id="search_results" >
 
+
+    blah blah blay
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    blah blah
 </div>
 
 <script>
-        var submitted = false;
+    var submitted = false;
 
-        // ready waits for page to load before it executes
-        $(document).ready(function() {
+    // ready waits for page to load before it executes
+    $(document).ready(function() {
 
 
-            $('#affiliate_search').validate({
-                rules: {
-                    search_order_id: {
-                        required: false,
+        $('#affiliate_search').validate({
+            rules: {
+                search_order_id: {
+                    required: false,
+                },
+                search_email: {
+                    required: false,
+                },
+                search_surname:   {
+                    required: false,
+                }
+            },  //end rules
+            messages: {
+                search_order_id: {
+                    required: 'Required field',
+                },
+                search_email: {
+                    required: 'Required field',
+                },
+                search_surname: {
+                    required: 'Required field',
+                }
+            },
+            //end messages
+            errorPlacement: function(error, element) {
+                if( element.is(':radio') || element.is(':checkbox')) {
+                    error.appendTo(element.parent());
+                }
+                else {
+                    error.insertAfter(element);
+                }
+            },//end errorPlacement
+
+
+            showErrors: function(errorMap, errorList) {
+                /*if (submitted) {
+                 var summary = "You have the following errors: <br/>";
+                 $.each(errorList, function() { summary += " * " + this.message + "<br/>"; });
+                 $("#signin_errors").html(summary);
+                 submitted = false;
+
+
+
+                 }*/
+
+                this.defaultShowErrors();
+            },
+            invalidHandler: function(form, validator) {
+                submitted = true;
+            },
+            highlight: function(element) {
+                var id_attr = "#" + $( element ).attr("id") + "1";
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                $(id_attr).removeClass('glyphicon-ok').addClass('glyphicon-remove');
+
+            },
+            unhighlight: function(element) {
+                var id_attr = "#" + $( element ).attr("id") + "1";
+                $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                $(id_attr).removeClass('glyphicon-remove').addClass('glyphicon-ok');
+
+            },
+            errorElement: 'span',
+            errorClass: 'help-block',
+            errorPlacement: function(error, element) {
+                if(element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+
+                }
+            }
+        });//end validate
+
+
+        // end of ready
+    });
+
+
+    function allLetter(inputtxt)
+    {
+        var letters = /^[A-Za-z]+$/;
+        if(inputtxt.value.match(letters))
+        {
+            return true;
+        }
+        else
+        {
+            alert("message");
+            return false;
+        }
+    }
+
+    // submits the form for processing and updating
+    function doSubmit()
+    {
+
+
+        // validates the variable and also gives a true/false answer.
+        var	bSearchOrderId		    =	$("#affiliate_search").validate().element("#search_order_id");
+        var	bSearchEmail		=	$("#affiliate_search").validate().element("#search_email");
+        var	bSearchSurname		    =	$("#affiliate_search").validate().element("#search_surname");
+
+        // if all fields are filled in, we can proceed to calling the ajax code to save the form
+        if (bSearchOrderId && bSearchEmail && bSearchSurname)
+        {
+            // grab the variables from the form
+            var search_order_id		    =	$('#search_order_id').val();
+            var search_email			=	$('#search_email').val();
+            var search_surname			=	$('#search_surname').val();
+
+            // using ajax, we can call a php script and send it the variables.
+            $.ajax(
+                {
+                    url:		'/scripts/doSearch.php',
+                    type:		'POST',
+                    cache:		false,
+                    async:		true,
+                    dataType:	'json',
+                    data:
+                        {
+                            search_order_id 		:	search_order_id,
+                            search_email 		    :	search_email,
+                            search_surname 			:	search_surname,
+                        },
+                    success:	function(data)
+                    {
+
+                        // on success show the table data where id = "search_results"
+                        // $("#search_results").val(alert("This appears as alert not in div"));
+                        //$("#search_results").val("This doesn't appear");
+                        //$("#search_results").html("This does appear");
+                        $('#search_results').html(data.result);
+
                     },
-                    search_email: {
-                        required: false,
-                    },
-                    search_surname:   {
-                        required: false,
-                    }
-                },  //end rules
-                messages: {
-                    search_order_id: {
-                        required: 'Required field',
-                    },
-                    search_email: {
-                        required: 'Required field',
-                    },
-                    search_surname: {
-                        required: 'Required field',
-                    }
-                },
-                //end messages
-                errorPlacement: function(error, element) {
-                    if( element.is(':radio') || element.is(':checkbox')) {
-                        error.appendTo(element.parent());
-                    }
-                    else {
-                        error.insertAfter(element);
-                    }
-                },//end errorPlacement
-
-
-                showErrors: function(errorMap, errorList) {
-                    /*if (submitted) {
-                     var summary = "You have the following errors: <br/>";
-                     $.each(errorList, function() { summary += " * " + this.message + "<br/>"; });
-                     $("#signin_errors").html(summary);
-                     submitted = false;
-
-
-
-                     }*/
-
-                    this.defaultShowErrors();
-                },
-                invalidHandler: function(form, validator) {
-                    submitted = true;
-                },
-                highlight: function(element) {
-                    var id_attr = "#" + $( element ).attr("id") + "1";
-                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-                    $(id_attr).removeClass('glyphicon-ok').addClass('glyphicon-remove');
-
-                },
-                unhighlight: function(element) {
-                    var id_attr = "#" + $( element ).attr("id") + "1";
-                    $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-                    $(id_attr).removeClass('glyphicon-remove').addClass('glyphicon-ok');
-
-                },
-                errorElement: 'span',
-                errorClass: 'help-block',
-                errorPlacement: function(error, element) {
-                    if(element.parent('.input-group').length) {
-                        error.insertAfter(element.parent());
-                    } else {
-                        error.insertAfter(element);
-
+                    failure:	function()
+                    {
+                        alert('failure');
                     }
                 }
-            });//end validate
 
-
-            // end of ready
-        });
-
-
-        function allLetter(inputtxt)
-        {
-            var letters = /^[A-Za-z]+$/;
-            if(inputtxt.value.match(letters))
-            {
-                return true;
-            }
-            else
-            {
-                alert("message");
-                return false;
-            }
-        }
-
-        // submits the form for processing and updating
-        function doSubmit()
-        {
-
-
-            // validates the variable and also gives a true/false answer.
-            var	bSearchOrderId		    =	$("#affiliate_search").validate().element("#search_order_id");
-            var	bSearchEmail		=	$("#affiliate_search").validate().element("#search_email");
-            var	bSearchSurname		    =	$("#affiliate_search").validate().element("#search_surname");
-
-            // if all fields are filled in, we can proceed to calling the ajax code to save the form
-            if (bSearchOrderId && bSearchEmail && bSearchSurname)
-            {
-                // grab the variables from the form
-                var search_order_id		    =	$('#search_order_id').val();
-                var search_email			=	$('#search_email').val();
-                var search_surname			=	$('#search_surname').val();
-
-                // using ajax, we can call a php script and send it the variables.
-                $.ajax(
-                    {
-                        url:		'/scripts/doSearch.php',
-                        type:		'POST',
-                        cache:		false,
-                        async:		true,
-                        dataType:	'json',
-                        data:
-                            {
-                                search_order_id 		:	search_order_id,
-                                search_email 		    :	search_email,
-                                search_surname 			:	search_surname,
-                            },
-                        success:	function(data)
-                        {
-
-                            alert(data.table);
-
-                            // on success show the table data where id = "search_results"
-                            $('#search_results').html(data.table);
-
-                            function getTableData(){
-                                $.ajax("",
-                                    { success: "",
-                                        type: "get",
-                                        dataType: "text"
-                                    });
-                            }
-
-                        },
-                        failure:	function()
-                        {
-                            alert('failure');
-                        }
-                    }
-
-                )
-
-            }
-            else
-            {
-                // simple alert popup if fields are not all verified as valid
-                $.alert({
-                    backgroundDismiss: true, // this will just close the modal
-                    theme: 'material',
-                    animation: 'scale',
-                    type: 'red',
-                    typeAnimated: 'true',
-                    confirmButton: 'Ok',
-                    title: 'Reminder',
-                    content: "Please fill in all required fields",
-                });
-
-            }
+            )
 
         }
+        else
+        {
+            // simple alert popup if fields are not all verified as valid
+            $.alert({
+                backgroundDismiss: true, // this will just close the modal
+                theme: 'material',
+                animation: 'scale',
+                type: 'red',
+                typeAnimated: 'true',
+                confirmButton: 'Ok',
+                title: 'Reminder',
+                content: "Please fill in at least 1 required field",
+            });
+
+        }
+
+    }
 </script>
 
 

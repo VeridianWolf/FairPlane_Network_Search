@@ -59,7 +59,7 @@ define	('MYSQL_LOG_FILE',				$site_path . '/logfile_mysql.txt');
 define	('MYSQL_HOST',					'localhost');
 define	('MYSQL_USER',					'7apO3nBbB2a');
 define	('MYSQL_PASS',					'PIKkip91sD312');
-define	('MYSQL_DBASE',					'boxlegal');
+define	('MYSQL_DBASE',					'newfairp_website');
 
 # set if we want to debug mysql queries and store in MYSQL_LOG_FILE
 define	('MYSQL_CACHE_TIME_TINY',		30);
