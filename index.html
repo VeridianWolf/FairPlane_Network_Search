@@ -1,5 +1,38 @@
 {{header}}
 
+<!-- Jquery DataTables Example -->
+
+<script type="text/javascript">
+
+    /* HOW TO USE
+     *
+     *  Have your table prepared
+     *  give the table an ID
+     *  Make sure you have Jquery libraries linked
+     *  use the single function call to initialise the table
+     *
+     */
+
+    // as soon as the page document is loaded use ready function to initialise DataTable with id example
+    $(document).ready(function(){
+        $('#myTable').DataTable({
+        });
+
+    });
+
+
+</script>
+<style>
+    #myTable{
+        color: #000000;
+    }
+    #example{
+        color: #000000;
+    }
+</style>
+
+
+
 <div class="pd20"></div>
 <div class="pd20"></div>
 
@@ -19,7 +52,7 @@
         <div class="col-10">
             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                 <div class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
-                <input class="form-control" type="email" placeholder="Search by Clients Email Address" name="search_email" id="search_email">
+                <input class="form-control" type="text" placeholder="Search by Clients Email Address" name="search_email" id="search_email">
             </div>
         </div>
     </div>
@@ -41,21 +74,13 @@
 
 
 
+
+
 <div class="pd20"></div>
 
 
-<div class="search_results" id="search_results" >
+<div class="search_result" id="search_results" >
 
-
-    blah blah blay
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
-    blah blah
 </div>
 
 <script>
@@ -194,10 +219,14 @@
                     {
 
                         // on success show the table data where id = "search_results"
-                        // $("#search_results").val(alert("This appears as alert not in div"));
-                        //$("#search_results").val("This doesn't appear");
-                        //$("#search_results").html("This does appear");
                         $('#search_results').html(data.result);
+
+                        // this is formats the data shown in the table using DataTable Jquery
+                        // where the id #myTable is use DataTable function
+                        $('#myTable').DataTable({
+                            "deferRender": true
+                        });
+
 
                     },
                     failure:	function()
