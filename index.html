@@ -224,7 +224,11 @@
                         // this is formats the data shown in the table using DataTable Jquery
                         // where the id #myTable is use DataTable function
                         $('#myTable').DataTable({
-                            "deferRender": true
+                            "deferRender": true,
+                            "bProcessing": true,
+                            "bServerSide": true,
+                            "sAjaxSource": "../includes/php/server_processing.php"
+
                         });
 
 

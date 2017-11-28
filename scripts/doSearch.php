@@ -116,10 +116,8 @@ foreach ($data_2d_array as $data)
                     <td>$email<td/>
                     <td>$surname<td/>
                  </tr>";
-
-
-
 }
+
 # close the tbody tag
 $html .= "</tbody>";
 
