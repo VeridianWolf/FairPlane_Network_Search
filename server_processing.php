@@ -22,14 +22,16 @@
 $table = 'fp_flight_master_db_flight_info';
 
 // Table's primary key
-$primaryKey = 'order_id';
+$primaryKey = 'id';
 
+
+$where = " 1=1 ";
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
-    array( 'db' => 'order_id', 'dt' => 0 ),
+    array( 'db' => 'proclaim_id', 'dt' => 0 ),
     array( 'db' => 'email',  'dt' => 1 ),
     array( 'db' => 'surname',   'dt' => 2 ),
 );
@@ -48,8 +50,8 @@ $sql_details = array(
  * server-side, there is no need to edit below this line.
  */
 
-require_once($_SERVER["DOCUMENT_ROOT"]    .    "/../codelibrary/includes/php/ssp.class.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "../codelibrary/includes/php/ssp.class.php");
 
 echo json_encode(
-    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns )
+    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns , $where)
 );

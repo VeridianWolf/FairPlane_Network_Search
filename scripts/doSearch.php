@@ -83,16 +83,16 @@ $data_2d_array	=	$gMysql->selectToArray($sqlString,__FILE__,__LINE__);
 $num_items = count($data_2d_array);
 
 # start table (outside of foreach loop)
-$html = '<table id="myTable" class="display" cellspacing="0" width="100%">';
+$html = '<table id="myTable" class="display table" cellspacing="0" width="100%">';
 
 
 # start table headers
 # start table headers (outside of loop also as these won't change)
 $html .= "    <thead> 
                     <tr>
-                        <th>Order Id<th/>
-                        <th>Email Address<th/>
-                        <th>Surname<th/>
+                        <th>Order Id</th>
+                        <th>Email Address</th>
+                        <th>Surname</th>
                     </tr>
                 </thead>";
 
