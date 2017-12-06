@@ -18,6 +18,16 @@
         $('#myTable').DataTable({
         });
 
+
+        var table = $('#myTable').DataTable();
+
+        $('#example tbody')
+            .on( 'mouseenter', 'td', function () {
+                var colIdx = table.cell(this).index().column;
+
+                $( table.cells().nodes() ).removeClass( 'highlight' );
+                $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+            } );
     });
 
 
@@ -83,7 +93,7 @@
 <table id="myTable2" class="display table table-striped table-bordered smaller nowrap">
     <thead>
         <tr>
-            <th>Proclaim Id</th>
+            <th>Case Key</th>
             <th>Email Address</th>
             <th>Surname</th>
         </tr>

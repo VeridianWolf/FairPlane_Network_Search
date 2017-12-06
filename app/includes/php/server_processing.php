@@ -31,7 +31,7 @@ $where = " 1=1 ";
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
-    array( 'db' => 'proclaim_id', 'dt' => 0 ),
+    array( 'db' => 'case_key', 'dt' => 0 ),
     array( 'db' => 'email',  'dt' => 1 ),
     array( 'db' => 'surname',   'dt' => 2 ),
 );

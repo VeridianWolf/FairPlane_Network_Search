@@ -70,3 +70,10 @@ li:before {
 .span_red{
     color: #ff0000;
 }
+
+
+#myTable2 tbody tr:hover {
+    background-color: #ff0000;
+    cursor: pointer;
+
+}
