@@ -12,7 +12,7 @@ include ("app/includes/php/template.php");
 $gMysql				=	new Mysql_Library();
 
 # variable template = function getTemplate points to file index.html
-$template = getTemplate("index.html");
+$template = getTemplate("home.html");
 
 
 # variable template = function getTemplate points to file header.html

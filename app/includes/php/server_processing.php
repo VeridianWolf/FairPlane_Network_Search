@@ -25,15 +25,102 @@ $table = 'fp_flight_master_db_flight_info';
 $primaryKey = 'id';
 
 
-$where = " 1=1 ";
+$where = " order_id !='' ";
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
+
+
+# $d = contains the variable (db) that has been extracted from the database
+# dt is the index for each item, starting at 0
+# $row[]  use this to pick an item from the row of variables
+# return - always return something if you are using 'formatter'
+
+
 $columns = array(
-    array( 'db' => 'case_key', 'dt' => 0 ),
-    array( 'db' => 'email',  'dt' => 1 ),
-    array( 'db' => 'surname',   'dt' => 2 ),
+	array(
+		'db'        => 'case_input_date',
+		'dt'        => 0,
+		'formatter' => function( $d, $row ) {
+
+			if	($d == "0000-00-00 00:00:00")
+			{
+				$string	=	'--';
+
+				return	$string;
+			}
+			return date( 'd/m/Y', strtotime($d));
+		},
+	),
+    array( 'db' => 'case_key', 'dt' => 1 ),
+	array( 'db' => 'email',  'dt' => 2 ),
+	array( 'db' => 'forename',  'dt' => 3 ),
+	array(
+		'db'        => 'surname',
+		'dt'        => 4,
+		'formatter' => function( $d, $row ) {
+
+			$forename		=	$row[3];
+
+			if	(strcmp(strtolower($forename),"john") == 0)
+			{
+				return "****" . $d . "****";
+
+			}
+			return $d;
+
+		},
+	),
+
+
+	array(
+		'db'        => 'status',
+		'dt'        => 5,
+		'formatter' => function( $d, $row ) {
+
+			$status	=	strtolower($d);
+
+			return $status;
+
+		},
+	),
+
+	array(
+		'db'        => 'case_status',
+		'dt'        => 6,
+		'formatter' => function( $d, $row )
+		{
+
+			# some claims can have no order_id. These claims are ones that are not made via the website
+			$order_id		=	$row[7];
+			# if there is no order_id, then we should bypass this bit
+			if (!empty($order_id))
+			{
+				if	($d == "D")
+				{
+					return "<button class='btn btn-danger'>Declined</button>";
+				}
+				else if	($d == "A")
+				{
+					return "<button class='btn btn-success'>Approved</button>";
+				}
+				else if	($d == "P")
+				{
+					return "<button class='btn btn-warning'>Pending</button>";
+				}
+			}
+
+			return "No Order ID";
+
+		},
+	),
+
+	array( 'db' => 'order_id',  'dt' => 7 ),
+
+
+
+
 );
 
 // SQL server connection information
