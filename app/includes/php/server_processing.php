@@ -25,7 +25,10 @@ $table = 'fp_flight_master_db_flight_info';
 $primaryKey = 'id';
 
 
-$where = " order_id !='' ";
+# this excludes all claims where there is NO order_id or NO affiliate
+# no order_id really means there is no affiliate also, so it's a double safety measure
+
+$where = " order_id !='' and affiliate !='' ";
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier. In this case simple
@@ -93,7 +96,7 @@ $columns = array(
 		{
 
 			# some claims can have no order_id. These claims are ones that are not made via the website
-			$order_id		=	$row[7];
+			$order_id		=	$row[8];
 			# if there is no order_id, then we should bypass this bit
 			if (!empty($order_id))
 			{
@@ -116,7 +119,10 @@ $columns = array(
 		},
 	),
 
-	array( 'db' => 'order_id',  'dt' => 7 ),
+
+	array( 'db' => 'affiliate',  'dt' => 7 ),
+
+	array( 'db' => 'order_id',  'dt' => 8 ),
 
 
 
