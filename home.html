@@ -33,8 +33,24 @@
             "serverSide": true,
             "ajax": "app/includes/php/server_processing.php"
         } );
-    });
 
+
+        // allows the rows in table with id myTable2 to be clickable and pops up an alert box.
+        var table = $('#myTable2').DataTable();
+
+        $('#myTable2 tbody').on('click', 'tr', function () {
+            var data = table.row( this ).data();
+
+            // the flight id is unique
+            var proclaim_id        	=    data[9];
+            var affiliate_name        	=    data[7];
+
+            window.location.href='affiliate_data.php?id='+proclaim_id+'&name='+affiliate_name;
+        } );
+
+
+
+    } );
 
 
 

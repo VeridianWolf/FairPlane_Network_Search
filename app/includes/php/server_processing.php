@@ -122,7 +122,9 @@ $columns = array(
 
 	array( 'db' => 'affiliate',  'dt' => 7 ),
 
-	array( 'db' => 'order_id',  'dt' => 8 ),
+    array( 'db' => 'order_id',  'dt' => 8 ),
+
+    array( 'db' => 'proclaim_id',  'dt' => 9 ),
 
 
 
