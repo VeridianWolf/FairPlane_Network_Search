@@ -1,0 +1,96 @@
+{{header}}
+
+
+<div class="col-xs-12">
+
+	<table id="myTable2" class="display table table-striped table-bordered smaller nowrap">
+		<thead>
+		<tr>
+			<th>Case Input Date: {{case_input_data}}</th>
+			<th>Case Key: {{case_key}}</th>
+			<th>Email Address: {{email}}</th>
+			<th>Forename: {{forename}}</th>
+			<th>Surname: {{surname}}</th>
+			<th>Case Status:
+				{{select_string}}
+			</th>
+			<th>Affiliate: {{affiliate}}</th>
+		</tr>
+		</thead>
+		<tfoot>
+
+		</tfoot>
+	</table>
+
+</div>
+
+
+<script>
+/*
+* What does this Jquery / ajax do?
+*
+*  Specifies the URL to send the request to Default is the current page
+*  type of data is from POST
+*  data = The reason case_status look like this is because the value will always be changing so this says case_status is equal to the value that is stored in the id case_status
+*  data = The proclaim_id is a constant and every row in the database will have one so this doesn't change.
+*
+*
+* */
+$('#case_status').change(function(){
+
+
+
+	$.ajax({
+        url: 'scripts/doDrpoDownChange.php',
+        type: 'POST',
+        data: {
+            case_status: $('#case_status').val(),
+            proclaim_id: '{{proclaim_id}}'
+		},
+        dataType: 'text',
+        success: function(data)
+        {
+
+
+			<!-- This is the stying for the alert box -->
+            $.alert({
+
+                title: 'Thank You',
+                confirmButton: 'Ok',
+                content: 'Content has been changed!',
+                closeIcon: true,
+                closeIconClass: 'fa fa-close',
+                animationSpeed: 200,
+                theme: 'material',
+                confirmButtonClass: 'btn-success',
+                cancelButtonClass: 'btn-danger',
+                confirmButton: 'Ok',
+                cancelButton: 'Cancel',
+                escapeKey: true,
+                backgroundDismiss: true,
+
+                theme: 'material',
+                animation: 'scale',
+                type: 'green',
+                typeAnimated: 'true',
+
+
+            });
+
+
+
+
+
+
+
+
+        }
+    });
+
+});
+
+</script>
+
+
+
+{{footer}}

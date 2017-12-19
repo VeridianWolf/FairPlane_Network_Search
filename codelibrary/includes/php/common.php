@@ -29,7 +29,7 @@ function __minify_v($input) {
  * =======================================================
  * -- CODE: ----------------------------------------------
  *
- *    echo minify_html(file_get_contents('affiliate_home.html'));
+ *    echo minify_html(file_get_contents('affiliate_data.html'));
  *
  * -------------------------------------------------------
  */
