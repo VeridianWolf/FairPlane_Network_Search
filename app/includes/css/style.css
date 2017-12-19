@@ -73,6 +73,10 @@ li:before {
 
 
 #myTable2 tbody tr:hover {
-    background-color: #ff0000;
+    background-color: rgba(26, 73, 130, 0.7);
     cursor: pointer;
+}
+
+#myTable2 tbody tr:hover>.sorting_1{
+    background-color: rgba(26, 73, 130, 0.1);
 }
