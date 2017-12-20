@@ -71,12 +71,33 @@ li:before {
     color: #ff0000;
 }
 
+.results_table tr{
+    background-color: #F1F1F1;
+}
+.results_table tr td{
+    background-color: #F9F9F9;
+    cursor: default;
+}
 
 #myTable2 tbody tr:hover {
-    background-color: rgba(26, 73, 130, 0.7);
+    background-color: rgba(26, 73, 130, 0.3);
     cursor: pointer;
 }
 
 #myTable2 tbody tr:hover>.sorting_1{
-    background-color: rgba(26, 73, 130, 0.1);
+    background-color: rgba(26, 73, 130, 0.5);
+}
+
+.results tr[visible='false'],
+.no-result{
+    display:none;
+}
+
+.results tr[visible='true']{
+    display:table-row;
+}
+
+.counter{
+    padding:8px;
+    color:#ccc;
 }
