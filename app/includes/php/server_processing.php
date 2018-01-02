@@ -1,51 +1,41 @@
 <?php
 
 /*
- * DataTables example server-side processing script.
+ * DataTables server-side processing script.
  *
- * Please note that this script is intentionally extremely simply to show how
- * server-side processing can be implemented, and probably shouldn't be used as
- * the basis for a large complex system. It is suitable for simple use cases as
- * for learning.
- *
- * See http://datatables.net/usage/server-side for full details on the server-
- * side processing requirements of DataTables.
- *
- * @license MIT - http://datatables.net/license_mit
  */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Easy set variables
- */
-
-// DB table to use
+# database table to use
 $table = 'fp_flight_master_db_flight_info';
 
-// Table's primary key
+# table's primary key
 $primaryKey = 'id';
 
 
 # this excludes all claims where there is NO order_id or NO affiliate
 # no order_id really means there is no affiliate also, so it's a double safety measure
-
 $where = " order_id !='' and affiliate !='' ";
-// Array of database columns which should be read and sent back to DataTables.
-// The `db` parameter represents the column name in the database, while the `dt`
-// parameter represents the DataTables column identifier. In this case simple
-// indexes
 
 
+/*
+ * BELOW IS AN EXPLANATION OF HOW THE FOLLOWING $columns ARRAY LIST WORKS
+ *
+ */
+
+# Array of database columns which should be read and sent back to DataTables.
+# The `db` parameter represents the column name in the database, while the `dt`
+# parameter represents the DataTables column identifier. In this case simple indexes
 # $d = contains the variable (db) that has been extracted from the database
 # dt is the index for each item, starting at 0
 # $row[]  use this to pick an item from the row of variables
 # return - always return something if you are using 'formatter'
 
-
+#
 $columns = array(
 	array(
 		'db'        => 'case_input_date',
 		'dt'        => 0,
-		'formatter' => function( $d, $row ) {
+		'formatter' => function( $d, $row) {
 
 			if	($d == "0000-00-00 00:00:00")
 			{
@@ -88,7 +78,7 @@ $columns = array(
 
 		},
 	),
-
+    # array ( database column case_status, row index 6
 	array(
 		'db'        => 'case_status',
 		'dt'        => 6,
@@ -98,17 +88,28 @@ $columns = array(
 			# some claims can have no order_id. These claims are ones that are not made via the website
 			$order_id		=	$row[8];
 			# if there is no order_id, then we should bypass this bit
+            # if order_id is not empty
 			if (!empty($order_id))
 			{
+			    # D = declined
+                # A = Approved
+                # P = Pending
+
+			    # if $d is == to D
+                # return button with btn-danger class
 				if	($d == "D")
 				{
 					return "<button class='btn btn-danger'>Declined</button>";
 				}
-				else if	($d == "A")
+                # else if $d is == to A
+                # return button with btn-success class
+                else if	($d == "A")
 				{
 					return "<button class='btn btn-success'>Approved</button>";
 				}
-				else if	($d == "P")
+                # else if $d is == to P
+                # return button with btn-warning class
+                else if	($d == "P")
 				{
 					return "<button class='btn btn-warning'>Pending</button>";
 				}
@@ -119,11 +120,13 @@ $columns = array(
 		},
 	),
 
-
+    # array ( database column name affiliate,  row index 7 )
 	array( 'db' => 'affiliate',  'dt' => 7 ),
 
+    # array ( database column name order_id,  row index 8 )
     array( 'db' => 'order_id',  'dt' => 8 ),
 
+    # array ( database column name proclaim_id,  row index 9 )
     array( 'db' => 'proclaim_id',  'dt' => 9 ),
 
 
