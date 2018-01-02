@@ -41,15 +41,14 @@ else
 }
 
 
-
-#variable options_names is equal to an array list with the drop down menus names held inside.
+# variable options_names is equal to an array list with the drop down menus names held inside.
 $options_names  =   array(
     '-- Select --',               #
     'Approved',                   #01
     'Pending',                    #02
     'Declined',                   #03
 );
-
+# variable options_values is equal to the array list of drop down menu values.
 $options_values  =   array(
     '',                                                 # -- Select --
     'A',                                               # Approved
@@ -101,9 +100,8 @@ $template = getTemplate("affiliate_data.html");
 $header = getTemplate("app/templates/header.html");
 $footer = getTemplate("app/templates/footer.html");
 
-
+# $template variable is using a string replacement function to find the {{string}} and replace it with the content of the variable.
 # variable template = string replace {{header}} with the variable $header
-# variable template = string replace {{footer}} with the variable $footer
 $template = str_replace("{{header}}", $header, $template);
 $template = str_replace("{{footer}}", $footer, $template);
 $template = str_replace("{{case_input_data}}", $case_input_data, $template);

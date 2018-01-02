@@ -45,7 +45,7 @@ if (!empty($order_id))
 # if $email is not empty then add $email to $sqlString
 if (!empty($email))
 {
-    # if order_id is not empty then add AND to $sqlString
+    # if order_id is not empty then append AND to $sqlString
     if (!empty($order_id))
     {
         $sqlString .=" AND ";
