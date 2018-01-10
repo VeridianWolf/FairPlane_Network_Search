@@ -1,4 +1,9 @@
 <?php
+
+/* * * * * * * * * * * * * * * * * * * * * * *
+ *  DATATABLES SERVERSIDE PROCESSING SCRIPT  *
+ * * * * * * * * * * * * * * * * * * * * * * */
+
 # include these files from codelibrary
 require_once($_SERVER["DOCUMENT_ROOT"]	.	"../codelibrary/includes/php/autoload.php");
 require_once($_SERVER["DOCUMENT_ROOT"]	.	"../codelibrary/includes/php/common.php");

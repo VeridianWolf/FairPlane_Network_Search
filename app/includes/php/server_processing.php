@@ -1,9 +1,8 @@
 <?php
 
-/*
- * DataTables server-side processing script.
- *
- */
+/* * * * * * * * * * * * * * * * * * * * * * *
+ *  DATATABLES SERVERSIDE PROCESSING SCRIPT  *
+ * * * * * * * * * * * * * * * * * * * * * * */
 
 # database table to use
 $table = 'fp_flight_master_db_flight_info';
@@ -16,7 +15,6 @@ $primaryKey = 'id';
 # no order_id really means there is no affiliate also, so it's a double safety measure
 $where = " order_id !='' and affiliate !='' ";
 
-
 /*
  * BELOW IS AN EXPLANATION OF HOW THE FOLLOWING $columns ARRAY LIST WORKS
  *
@@ -26,7 +24,7 @@ $where = " order_id !='' and affiliate !='' ";
 # The `db` parameter represents the column name in the database, while the `dt`
 # parameter represents the DataTables column identifier. In this case simple indexes
 # $d = contains the variable (db) that has been extracted from the database
-# dt is the index for each item, starting at 0
+# dt = the index for each item, starting at 0
 # $row[]  use this to pick an item from the row of variables
 # return - always return something if you are using 'formatter'
 
@@ -35,8 +33,8 @@ $columns = array(
 	array(
 		'db'        => 'case_input_date',
 		'dt'        => 0,
-		'formatter' => function( $d, $row) {
-
+		'formatter' => function( $d, $row ) {
+            #
 			if	($d == "0000-00-00 00:00:00")
 			{
 				$string	=	'--';
@@ -56,6 +54,7 @@ $columns = array(
 
 			$forename		=	$row[3];
 
+			# if you search for name john the it will return the surname in the table with **** either side ****
 			if	(strcmp(strtolower($forename),"john") == 0)
 			{
 				return "****" . $d . "****";
@@ -66,7 +65,9 @@ $columns = array(
 		},
 	),
 
-
+    # array ( database column status, row index 5 formatter function $d, $row)
+    # variable $status is equal to function strtolower($d) (converts the strings shown in this column as lowercase)
+    # always return is using formatter
 	array(
 		'db'        => 'status',
 		'dt'        => 5,
