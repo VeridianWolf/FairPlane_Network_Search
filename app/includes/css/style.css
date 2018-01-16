@@ -101,3 +101,9 @@ li:before {
     padding:8px;
     color:#ccc;
 }
+
+@media (min-width: 1200px){
+    .container {
+        width: 1396px;
+    }
+}
