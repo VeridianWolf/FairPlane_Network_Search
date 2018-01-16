@@ -1,0 +1,160 @@
+{{header}}
+
+<div class="container">
+
+<script type="text/javascript">
+	/*
+	*
+	* Uses the keyup function when typing in the input box with
+	* class .search will search the results given in the table
+	*
+	* */
+    $(document).ready(function() {
+        $(".search").keyup(function () {
+            var searchTerm = $(".search").val();
+            var listItem = $('.results tbody').children('tr');
+            var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+
+            $.extend($.expr[':'], {'containsi': function(elem, i, match, array){
+                return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+            }
+            });
+
+            $(".results tbody tr").not(":containsi('" + searchSplit + "')").each(function(e){
+                $(this).attr('visible','false');
+            });
+
+            $(".results tbody tr:containsi('" + searchSplit + "')").each(function(e){
+                $(this).attr('visible','true');
+            });
+
+            var jobCount = $('.results tbody tr[visible="true"]').length;
+            $('.counter').text(jobCount + ' item');
+
+            if(jobCount == '0') {$('.no-result').show();}
+            else {$('.no-result').hide();}
+        });
+    });
+</script>
+
+
+<div class="col-xs-12">
+	<div class="form-group pull-right">
+		<input type="text" class="search form-control" placeholder="Search Results?">
+	</div>
+	<span class="counter pull-right"></span>
+	<table class="display table table-striped table-bordered smaller nowrap results" >
+		<thead>
+		<tr>
+			<th>Type</th>
+			<th class="col-md-5 col-xs-5 trow">Results</th>
+		</tr>
+		<tr class="warning no-result">
+			<td colspan="4"><i class="fa fa-warning"></i> No result</td>
+		</tr>
+		</thead>
+		<tbody class="results_table">
+		<tr>
+			<th>Case Input Date:</th>
+			<th>{{case_input_data}}</th>
+		</tr>
+		<tr>
+			<th>Case Key:</th>
+			<th>{{case_key}}</th>
+		</tr>
+		<tr>
+			<th>Email Address:</th>
+			<th>{{email}}</th>
+		</tr>
+		<tr>
+			<th>Forename:</th>
+			<th>{{forename}}</th>
+		</tr>
+		<tr>
+			<th>Surname:</th>
+			<th>{{surname}}</th>
+		</tr>
+		<tr>
+			<th>Case Status:</th>
+			<th>{{select_string}}</th>
+		</tr>
+		<tr>
+			<th>Affiliate: </th>
+			<th>{{affiliate}}</th>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+
+
+
+<script>
+/*
+* What does this Jquery / ajax do?
+*
+*  Specifies the URL to send the request to Default is the current page
+*  type of data is from POST
+*  data = The reason case_status look like this is because the value will always be changing so this says case_status is equal to the value that is stored in the id case_status
+*  data = The proclaim_id is a constant and every row in the database will have one so this doesn't change.
+*
+*
+* */
+$('#case_status').change(function(){
+
+
+
+	$.ajax({
+        url: '../scripts/doDrpoDownChange.php',
+        type: 'POST',
+        data: {
+            case_status: $('#case_status').val(),
+            proclaim_id: '{{proclaim_id}}'
+		},
+        dataType: 'text',
+        success: function(data)
+        {
+
+
+			<!-- This is the stying for the alert box -->
+            $.alert({
+
+                title: 'Thank You',
+                confirmButton: 'Ok',
+                content: 'Content has been changed!',
+                closeIcon: true,
+                closeIconClass: 'fa fa-close',
+                animationSpeed: 200,
+                theme: 'material',
+                confirmButtonClass: 'btn-success',
+                cancelButtonClass: 'btn-danger',
+                confirmButton: 'Ok',
+                cancelButton: 'Cancel',
+                escapeKey: true,
+                backgroundDismiss: true,
+
+                theme: 'material',
+                animation: 'scale',
+                type: 'green',
+                typeAnimated: 'true',
+
+
+            });
+
+
+
+
+
+
+
+
+        }
+    });
+
+});
+
+</script>
+
+
+
+{{footer}}
