@@ -31,7 +31,7 @@
         $('#myTable2').DataTable( {
             "processing": true,
             "serverSide": true,
-            "ajax": "app/includes/php/server_processing.php"
+            "ajax": "../affiliate_data/server_processing.php"
         } );
 
 
@@ -45,7 +45,7 @@
             var proclaim_id        	=    data[9];
             var affiliate_name      =    data[7];
 
-            window.location.href='affiliate_data.php?proclaim_id='+proclaim_id+'&affiliate='+affiliate_name;
+            window.location.href='../affiliate_data/index.php?proclaim_id='+proclaim_id+'&affiliate='+affiliate_name;
         } );
 
 
